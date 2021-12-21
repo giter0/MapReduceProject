@@ -7,6 +7,8 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+import java.io.IOException;
+
 /**
  * @author Jane
  * @version 1.0
@@ -38,7 +40,7 @@ public class FlowDriver {
         job.setJarByClass(FlowDriver.class);
         //3 关联 Mapper 和 Reducer
         job.setMapperClass(FlowMapper.class);
-        job.setReducerClass(FlowReducer.class);
+        job.setReducerClass(FlowReduce.class);
 
 //4 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(FlowBean.class);
@@ -53,7 +55,7 @@ public class FlowDriver {
          */
         int areaReduceTasks = 5;
         job.setPartitionerClass(AreaPartitioner.class);
-        job.setNumReduceTasks(areaReduceTasks5);
+        job.setNumReduceTasks(areaReduceTasks);
 
 //6 设置程序的输入输出路径
         args = new String[]{inputPath,outputPath};

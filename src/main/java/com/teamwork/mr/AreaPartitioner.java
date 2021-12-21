@@ -23,10 +23,10 @@ public class AreaPartitioner extends Partitioner<FlowBean ,Text>{
          * area1 area2 area3 area4
          * 第五分区为不属于这四个运营商的数据
          */
-        String area1 = 001;
-        String area2 = 002;
-        String area3 = 003;
-        String area4 = 004;
+        String area1 = "001";
+        String area2 = "002";
+        String area3 = "003";
+        String area4 = "004";
 
         String phone = text.toString();
 
