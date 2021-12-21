@@ -16,7 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FlowBean implements WritableComparable<FlowBean> {
-    private String id; //编号
+ 
+      private String id; //编号
     private String phone; //手机号
     private String date; //年月日 eg.2021-9-10
     private String timeStart; //开始时间时分秒  eg.10：30：20
@@ -75,10 +76,10 @@ public class FlowBean implements WritableComparable<FlowBean> {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
-        SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd HH：mm：ss");//创建日期转换对象：年-月-日 时：分：秒
+    public void setDateStart() {
+        SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//创建日期转换对象：年-月-日 时：分：秒
         try {
-            this.dateStart =sdf.parse(this.date+" "+this.timeStart);//转换为 date 类型
+            this.dateStart=sdf.parse(this.date.concat(" ").concat(this.timeStart)); //转换为 date 类型
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -88,10 +89,10 @@ public class FlowBean implements WritableComparable<FlowBean> {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
-        SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd HH：mm：ss");//创建日期转换对象：年-月-日 时：分：秒
+    public void setDateEnd() {
+        SimpleDateFormat sdf  =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//创建日期转换对象：年-月-日 时：分：秒
         try {
-            this.dateEnd=sdf.parse(this.date+" "+this.timeEnd); //转换为 date 类型
+            this.dateEnd=sdf.parse(this.date.concat(" ").concat(this.timeEnd)); //转换为 date 类型
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -105,9 +106,6 @@ public class FlowBean implements WritableComparable<FlowBean> {
         this.operator = operator;
     }
 
-    public void setSumFlow(long sumFlow) {
-        this.sumFlow = sumFlow;
-    }
 
     public long getUpFlow() {
         return upFlow;
@@ -136,17 +134,17 @@ public class FlowBean implements WritableComparable<FlowBean> {
     //序列化（顺序要与下一样）
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeUTF(id);
         out.writeUTF(phone);
         out.writeUTF(date);
         out.writeUTF(timeStart);
         out.writeUTF(timeEnd);
         //out.writeUTF(String.valueOf(dateEnd));
         //out.writeUTF(String.valueOf(dateStart));
-        out.writeUTF(operator);
+        //out.writeUTF(operator);
         out.writeLong(upFlow);
         out.writeLong(downFlow);
         out.writeLong(sumFlow);
+        out.writeUTF(id);
     }
 
     //反序列化
@@ -157,6 +155,7 @@ public class FlowBean implements WritableComparable<FlowBean> {
         this.date=in.readUTF();
         this.timeStart=in.readUTF();
         this.timeEnd=in.readUTF();
+       // this.operator=in.readUTF();
         this.upFlow=in.readLong();
         this.downFlow=in.readLong();
         this.sumFlow=in.readLong();
@@ -172,7 +171,6 @@ public class FlowBean implements WritableComparable<FlowBean> {
 
        //return phone+"\t"+date+"\t"+timeStart+"\t"+timeEnd+"\t"+sumFlow+"\t"+id;//需求5
     }
-
 
     @Override
     public int compareTo(FlowBean o) {
@@ -199,6 +197,8 @@ public class FlowBean implements WritableComparable<FlowBean> {
 //        }else
 //            return 1;
     }
+
+
 
 
 }
