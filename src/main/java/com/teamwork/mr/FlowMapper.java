@@ -34,7 +34,7 @@ public class FlowMapper extends Mapper<LongWritable, Text, FlowBean,Text> {
             outK.setUpFlow(Long.parseLong(split[4]));//分割后排序第4个
             outK.setDownFlow(Long.parseLong(split[5]));//分割后排序第5个
             outK.setSumFlow();
-            outK.setId(split[6]);
+            outK.setId(split[7]);
 
             //写出
             context.write(outK,outV);
