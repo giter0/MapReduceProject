@@ -19,19 +19,21 @@ public class AreaPartitioner extends Partitioner<FlowBean ,Text>{
 
         //
         /**
-         * 设置五个分区(按照运营商来设置，四个区代表四个不同的运营商)
+         * 设置3个分区(按照运营商来设置，四个区代表四个不同的运营商)
          * area1 area2 area3 area4
-         * 第五分区为不属于这四个运营商的数据
+         * 第1分区为中国移动
+         * 第2分区为中国联通
+         * 第3分区为中国电信
          */
         String area1 = "001";
         String area2 = "002";
-        String area3 = "003";
-        String area4 = "004";
+//        String area3 = "003";
+//        String area4 = "004";
 
         String phone = text.toString();
 
         // areaIndex 为需要对那一列属性分区
-        int areaIndex ;
+        int areaIndex = 6;
         String prePhone = phone.substring(0, areaIndex);
 
         int partition;
@@ -39,12 +41,8 @@ public class AreaPartitioner extends Partitioner<FlowBean ,Text>{
             partition = 0;
         } else if (area2.equals(prePhone)) {
             partition = 1;
-        } else if (area3.equals(prePhone)) {
+        } else{
             partition = 2;
-        } else if (area4.equals(prePhone)) {
-            partition = 3;
-        } else {
-            partition = 4;
         }
         return partition;
     }
