@@ -51,9 +51,10 @@ public class FlowDriver {
         job.setOutputValueClass(FlowBean.class);
 
         /**
-         * 如果修改了运营商的数量（默认有四个不同的运营商），则需要更改ReduceTasks分区数 areaReduceTasks
+         * 如果修改了运营商的数量（默认有五个不同的运营商），则需要更改ReduceTasks分区数 areaReduceTasks
          */
-        int areaReduceTasks = 5;
+//        int areaReduceTasks = 5;
+        int areaReduceTasks = 3;
         job.setPartitionerClass(AreaPartitioner.class);
         job.setNumReduceTasks(areaReduceTasks);
 
