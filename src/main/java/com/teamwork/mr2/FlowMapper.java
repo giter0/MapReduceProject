@@ -1,6 +1,5 @@
 package com.teamwork.mr2;
 
-
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -37,15 +36,11 @@ public class FlowMapper extends Mapper<LongWritable,Text, FlowBean,Text> {
             id = split[split.length - 2];
         }
         outV.set(phone);
-        outK.setDate(split[1]);//分割后排序第1个:日期
-        outK.setTimeStart(split[2]);//分割后排序第2个:开始时间
-        outK.setTimeEnd(split[3]);//分割后排序第3个:结束时间
         outK.setOperator(split[split.length - 1]);
         outK.setUpFlow(Long.parseLong(up));
         outK.setDownFlow(Long.parseLong(down));
         outK.setSumFlow();
         outK.setId(id);
-        outK.setFlag("false");
 
         //写出
         context.write(outK,outV);
