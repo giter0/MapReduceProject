@@ -45,13 +45,6 @@ public class FlowBean implements WritableComparable <FlowBean> {
         this.sumFlow = this.downFlow+this.upFlow;
     }
 
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
 
     public String getId() {
         return id;
