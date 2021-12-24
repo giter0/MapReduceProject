@@ -11,7 +11,6 @@ import java.io.IOException;
 //3.重写空参构造
 //4.重写tostring方法
 public class FlowBean implements WritableComparable <FlowBean> {
-    private  String flag;
     private String id; //编号
     private String phone; //手机号
     private String operator; //运营商
